@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Urban Sport Store – Tienda de ropa deportiva Nike y Adidas en Medellín. Camisetas, pantalonetas y zapatos de las mejores marcas."/>
+  <title>Urban Sport Store | Ropa Deportiva – Medellín</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Semi+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ==========================================
+       DESIGN TOKENS
+    ========================================== */
+    :root {
+      --red:        #E8192C;
+      --red-dark:   #B5121F;
+      --red-dim:    rgba(232,25,44,0.12);
+      --black:      #070707;
+      --dark:       #0F0F0F;
+      --dark2:      #161616;
+      --dark3:      #1E1E1E;
+      --dark4:      #252525;
+      --white:      #F8F6F2;
+      --muted:      #7A7A7A;
+      --border:     rgba(255,255,255,0.07);
+      --border-r:   rgba(232,25,44,0.2);
+
+      --fd: 'Anton', sans-serif;
+      --fu: 'Barlow Semi Condensed', sans-serif;
+      --fb: 'Barlow', sans-serif;
+
+      --mw: 1240px;
+      --r:  3px;
+      --rl: 8px;
+    }
+
+    /* ==========================================
+       RESET
+    ========================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--black); color: var(--white); font-family: var(--fb); line-height: 1.6; overflow-x: hidden; }
+    img  { display: block; max-width: 100%; }
+    a    { color: inherit; text-decoration: none; }
+    ul   { list-style: none; }
+
+    /* ==========================================
+       TYPOGRAPHY — H1 > H2 > H3 clear hierarchy
+    ========================================== */
+    h1 {
+      font-family: var(--fd);
+      font-size: clamp(3.4rem, 11vw, 8rem);
+      line-height: .91;
+      letter-spacing: .01em;
+    }
+    h2 {
+      font-family: var(--fd);
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      line-height: .95;
+      letter-spacing: .01em;
+    }
+    h3 {
+      font-family: var(--fu);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    p { font-size: clamp(.88rem, 1.4vw, .97rem); color: var(--muted); line-height: 1.7; }
+
+    .label {
+      font-family: var(--fu);
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    /* ==========================================
+       LAYOUT
+    ========================================== */
+    .container {
+      width: 100%;
+      max-width: var(--mw);
+      margin-inline: auto;
+      padding-inline: clamp(1.2rem, 5vw, 3rem);
+    }
+    .section { padding-block: clamp(4rem, 10vw, 7.5rem); }
+    .red-line { display: block; width: 42px; height: 2.5px; background: var(--red); margin-bottom: 1.1rem; }
+    .divider  { width: 100%; height: 1px; background: var(--border); }
+
+    /* ==========================================
+       BUTTONS — high contrast CTA
+    ========================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--fu);
+      font-weight: 700;
+      font-size: .86rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .9rem 2.1rem;
+      border-radius: var(--r);
+      cursor: pointer;
+      border: none;
+      transition: all .22s ease;
+      white-space: nowrap;
+    }
+    /* Primary: red bg, white text — WCAG AA */
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-primary:focus-visible {
+      background: #ff2d42;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(232,25,44,.4);
+    }
+    /* Secondary: white bg, black text — WCAG AAA */
+    .btn-secondary {
+      background: var(--white);
+      color: var(--black);
+    }
+    .btn-secondary:hover, .btn-secondary:focus-visible {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(248,246,242,.2);
+    }
+    /* Outline */
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .btn-outline:hover, .btn-outline:focus-visible {
+      border-color: var(--white);
+      background: rgba(255,255,255,.07);
+      transform: translateY(-2px);
+    }
+    .btn:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+    /* ==========================================
+       NAVIGATION
+    ========================================== */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 900;
+      background: rgba(7,7,7,.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1rem;
+    }
+    .nav-logo {
+      font-family: var(--fd);
+      font-size: 1.65rem;
+      letter-spacing: .04em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-family: var(--fu);
+      font-weight: 600;
+      font-size: .8rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .btn { padding: .55rem 1.35rem; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 910;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      transition: all .3s;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0;
+      z-index: 800;
+      background: var(--black);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--fd);
+      font-size: clamp(2.4rem,7vw,3.2rem);
+      color: var(--white);
+      letter-spacing: .03em;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--red); }
+
+    /* ==========================================
+       HERO
+    ========================================== */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    /* Diagonal stripe background */
+    .hero-stripes {
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 80px,
+        rgba(232,25,44,.028) 80px,
+        rgba(232,25,44,.028) 82px
+      );
+    }
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(232,25,44,.08) 0%, transparent 65%);
+    }
+    .hero-number {
+      position: absolute;
+      right: -1rem; top: 50%;
+      transform: translateY(-60%);
+      font-family: var(--fd);
+      font-size: clamp(14rem, 30vw, 26rem);
+      color: rgba(255,255,255,.025);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -.02em;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding-bottom: clamp(3rem, 8vw, 6rem);
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 36px; height: 2px;
+      background: var(--red);
+    }
+    .hero-title { color: var(--white); }
+    .hero-title .accent { color: var(--red); }
+    .hero-title .hollow {
+      -webkit-text-stroke: 1.5px rgba(255,255,255,.6);
+      color: transparent;
+    }
+    .hero-desc {
+      margin-top: 1.6rem;
+      max-width: 44ch;
+      font-size: clamp(.9rem,1.5vw,1.02rem);
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .hero-cta {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      margin-top: 2.4rem;
+    }
+    .hero-brands {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .hero-brands-label {
+      font-family: var(--fu); font-size: .68rem;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .brand-pill {
+      font-family: var(--fd); font-size: 1rem;
+      letter-spacing: .1em;
+      padding: .35rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--white);
+      transition: border-color .2s, background .2s;
+    }
+    .brand-pill:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.05); }
+
+    /* Floating badge */
+    .hero-badge {
+      position: absolute;
+      right: clamp(1rem, 5vw, 5rem);
+      bottom: clamp(3rem, 7vw, 6.5rem);
+      width: clamp(120px, 15vw, 180px);
+      height: clamp(120px, 15vw, 180px);
+      border: 1px solid var(--border-r);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      animation: rotateBadge 18s linear infinite;
+    }
+    .hero-badge::before {
+      content: '';
+      position: absolute; inset: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,25,44,.12);
+    }
+    @keyframes rotateBadge {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .hero-badge-inner {
+      text-align: center;
+      animation: rotateBadge 18s linear infinite reverse;
+    }
+    .hero-badge-icon { font-size: clamp(2rem,4vw,3rem); }
+    .hero-badge-txt {
+      font-family: var(--fu); font-size: .58rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); margin-top: 4px;
+    }
+
+    /* ==========================================
+       MARQUEE
+    ========================================== */
+    .marquee-wrap {
+      background: var(--red);
+      overflow: hidden;
+      padding-block: .78rem;
+    }
+    .marquee-track {
+      display: flex; gap: 3rem;
+      width: max-content;
+      animation: marquee 14s linear infinite;
+    }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    .marquee-item {
+      font-family: var(--fd);
+      font-size: 1.1rem; letter-spacing: .1em;
+      text-transform: uppercase; color: #fff;
+      white-space: nowrap;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .mdot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.4); flex-shrink: 0; }
+
+    /* ==========================================
+       CATEGORÍAS
+    ========================================== */
+    #categorias { background: var(--dark); }
+    .cat-header {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: clamp(2.5rem, 6vw, 4rem);
+    }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+    .cat-card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--dark2);
+      cursor: pointer;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+    }
+    /* emoji illustration */
+    .cat-visual {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(4rem, 10vw, 7rem);
+      transition: transform .5s ease;
+      background: var(--dark3);
+    }
+    .cat-card:hover .cat-visual { transform: scale(1.08); }
+    .cat-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,7,7,.92) 0%, rgba(7,7,7,.3) 50%, transparent 100%);
+      transition: opacity .3s;
+    }
+    .cat-card:hover .cat-overlay { opacity: .9; }
+    .cat-info {
+      position: relative; z-index: 2;
+      padding: clamp(1.2rem, 3vw, 2rem);
+    }
+    .cat-name { color: var(--white); margin-bottom: .3rem; }
+    .cat-sub  { font-family: var(--fu); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .cat-arrow {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--red); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; z-index: 2;
+      opacity: 0; transform: scale(.6);
+      transition: opacity .3s, transform .3s;
+    }
+    .cat-card:hover .cat-arrow { opacity: 1; transform: scale(1); }
+
+    /* ==========================================
+       PRODUCTOS DESTACADOS
+    ========================================== */
+    #productos { background: var(--black); }
+    .prod-header {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: clamp(2.5rem, 6vw, 4rem);
+    }
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(260px,100%), 1fr));
+      gap: 1.4rem;
+    }
+    .prod-card {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      overflow: hidden;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+    .prod-card:hover {
+      border-color: var(--border-r);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.6);
+    }
+    .prod-img {
+      aspect-ratio: 1;
+      background: var(--dark2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(3.5rem, 8vw, 5rem);
+      position: relative; overflow: hidden;
+      transition: background .3s;
+    }
+    .prod-card:hover .prod-img { background: var(--dark3); }
+    .prod-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(232,25,44,.07), transparent 70%);
+    }
+    .prod-brand-badge {
+      position: absolute; top: .85rem; left: .85rem;
+      font-family: var(--fd); font-size: .72rem;
+      letter-spacing: .1em;
+      background: rgba(7,7,7,.85);
+      backdrop-filter: blur(6px);
+      color: var(--white);
+      padding: .2rem .6rem; border-radius: 20px;
+      border: 1px solid var(--border);
+      z-index: 1;
+    }
+    .prod-body { padding: 1.1rem 1.2rem 1.4rem; }
+    .prod-cat  {
+      font-family: var(--fu); font-size: .66rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--red); margin-bottom: .35rem;
+    }
+    .prod-name {
+      font-family: var(--fu); font-weight: 700;
+      font-size: clamp(.95rem, 1.8vw, 1.08rem);
+      color: var(--white); margin-bottom: .35rem;
+    }
+    .prod-desc { font-size: .81rem; color: var(--muted); line-height: 1.55; }
+    .prod-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1rem; padding-top: .85rem;
+      border-top: 1px solid var(--border);
+    }
+    .prod-tag {
+      font-family: var(--fu); font-size: .66rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--red-dim); color: var(--red);
+      padding: .2rem .55rem; border-radius: 20px;
+    }
+    .prod-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--red); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      transition: transform .2s, background .2s;
+      border: none; cursor: pointer;
+    }
+    .prod-card:hover .prod-btn { transform: rotate(45deg); background: #ff2d42; }
+
+    /* ==========================================
+       MARCAS / BRANDS STRIP
+    ========================================== */
+    #marcas { background: var(--dark); }
+    .brands-inner {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 3rem;
+    }
+    .brands-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; width: 100%; max-width: 700px;
+    }
+    .brand-card {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      padding: clamp(2rem, 5vw, 3.5rem) 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+      transition: border-color .25s, transform .25s;
+    }
+    .brand-card:hover { border-color: var(--border-r); transform: translateY(-4px); }
+    .brand-logo {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: .06em; color: var(--white);
+    }
+    .brand-logo .swoosh { color: var(--red); }
+    .brand-desc { font-size: .84rem; color: var(--muted); text-align: center; max-width: 24ch; }
+    .brand-items {
+      display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center;
+      margin-top: .5rem;
+    }
+    .brand-item {
+      font-family: var(--fu); font-size: .68rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      border: 1px solid var(--border);
+      color: var(--muted); padding: .2rem .6rem; border-radius: 20px;
+    }
+
+    /* ==========================================
+       NOSOTROS / ABOUT
+    ========================================== */
+    #nosotros { background: var(--black); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+    }
+    .about-visual {
+      aspect-ratio: 4/5;
+      background: var(--dark);
+      border-radius: var(--rl);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(5rem, 12vw, 9rem);
+    }
+    .about-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--red-dim) 0%, transparent 60%);
+    }
+    .about-visual::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(to top, var(--dark), transparent);
+    }
+    .about-frame { position: absolute; inset: 14px; border: 1px solid var(--border-r); border-radius: var(--r); pointer-events: none; }
+    .about-stat {
+      position: absolute; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(7,7,7,.92); backdrop-filter: blur(10px);
+      border: 1px solid var(--border-r); border-radius: var(--r);
+      padding: 1rem 1.5rem; text-align: center; white-space: nowrap; z-index: 2;
+    }
+    .as-num { font-family: var(--fd); font-size: 2.2rem; color: var(--red); line-height: 1; }
+    .as-lbl { font-family: var(--fu); font-size: .67rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .about-cnt h2 { color: var(--white); margin-bottom: 1.2rem; }
+    .about-cnt p  { margin-bottom: 1rem; font-size: .93rem; line-height: 1.75; }
+    .about-feats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2rem;
+    }
+    .feat {
+      display: flex; gap: .75rem; align-items: flex-start;
+      padding: 1rem; background: var(--dark);
+      border: 1px solid var(--border); border-radius: var(--r);
+      transition: border-color .2s;
+    }
+    .feat:hover { border-color: var(--border-r); }
+    .feat-ico { font-size: 1.3rem; flex-shrink: 0; }
+    .feat-txt { font-family: var(--fu); font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--white); line-height: 1.4; }
+
+    /* ==========================================
+       CONTACTO
+    ========================================== */
+    #contacto { background: var(--dark); }
+    .contact-hdr { text-align: center; margin-bottom: clamp(2.5rem,6vw,4rem); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+    }
+    .c-items { display: flex; flex-direction: column; gap: 1.1rem; }
+    .c-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.2rem 1.4rem;
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      transition: border-color .2s, background .2s;
+    }
+    .c-item:hover { border-color: var(--border-r); background: var(--dark3); }
+    .c-ico {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--red-dim); color: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .c-lbl { font-family: var(--fu); font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: .2rem; }
+    .c-val { font-family: var(--fu); font-weight: 600; font-size: .97rem; color: var(--white); }
+    .c-val a { color: var(--white); transition: color .2s; }
+    .c-val a:hover { color: var(--red); }
+
+    .social-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .soc-btn {
+      display: flex; align-items: center; gap: .6rem;
+      font-family: var(--fu); font-weight: 600; font-size: .78rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .7rem 1.2rem; border-radius: var(--r);
+      border: 1.5px solid var(--border); color: var(--white);
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .soc-btn:hover { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+    .soc-btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+    /* Map card */
+    .map-card {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-radius: var(--rl);
+      overflow: hidden;
+      min-height: 340px;
+      display: flex; flex-direction: column;
+    }
+    .map-head {
+      padding: 1.1rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .map-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); }
+    .map-title { font-family: var(--fu); font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+    .map-body {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem; padding: 2rem; text-align: center;
+      position: relative; overflow: hidden; background: var(--dark3);
+    }
+    .map-body::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(232,25,44,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,25,44,.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .map-pin {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--red); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; z-index: 1;
+      box-shadow: 0 0 0 10px rgba(232,25,44,.12);
+    }
+    .map-addr { font-family: var(--fu); font-size: .9rem; font-weight: 600; color: var(--white); position: relative; z-index: 1; }
+    .map-city { font-size: .78rem; color: var(--muted); position: relative; z-index: 1; }
+
+    /* ==========================================
+       FOOTER
+    ========================================== */
+    footer { background: var(--black); border-top: 1px solid var(--border); padding-block: 2.5rem; }
+    .foot-inner { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; }
+    .foot-logo { font-family: var(--fd); font-size: 1.5rem; letter-spacing: .04em; }
+    .foot-logo span { color: var(--red); }
+    .foot-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .foot-links a { font-family: var(--fu); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .foot-links a:hover { color: var(--white); }
+    .foot-copy { font-size: .77rem; color: var(--muted); }
+
+    /* ==========================================
+       SCROLL REVEAL
+    ========================================== */
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+    [data-reveal="left"]  { transform: translateX(-24px); }
+    [data-reveal="left"].revealed  { transform: translateX(0); }
+    [data-reveal="right"] { transform: translateX(24px); }
+    [data-reveal="right"].revealed { transform: translateX(0); }
+
+    /* ==========================================
+       RESPONSIVE — mobile-first breakpoints
+    ========================================== */
+    @media (max-width: 900px) {
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { aspect-ratio: 16/9; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-badge { display: none; }
+      .brands-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .about-feats { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn { width: 100%; justify-content: center; }
+      .social-row { flex-direction: column; }
+      .soc-btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       MOBILE MENU OVERLAY
+  =========================== -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menú móvil">
+    <a href="#categorias" class="m-link">Categorías</a>
+    <a href="#productos"  class="m-link">Productos</a>
+    <a href="#marcas"     class="m-link">Marcas</a>
+    <a href="#nosotros"   class="m-link">Nosotros</a>
+    <a href="#contacto"   class="m-link">Contacto</a>
+  </nav>
+
+  <!-- ===========================
+       NAVIGATION
+  =========================== -->
+  <header id="nav" role="banner">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Urban Sport Store inicio">
+        URBAN<span>SPORT</span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="#categorias">Categorías</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#marcas">Marcas</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li>
+            <a href="#contacto" class="btn btn-primary" style="color:#fff;padding:.58rem 1.35rem">
+              Contacto
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===========================
+       HERO
+  =========================== -->
+  <section id="hero" aria-labelledby="hero-h1">
+    <div class="hero-stripes" aria-hidden="true"></div>
+    <div class="hero-glow"    aria-hidden="true"></div>
+    <div class="hero-number"  aria-hidden="true">23</div>
+
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span class="label">Medellín · Colombia · Sport Store</span>
+      </div>
+
+      <h1 id="hero-h1" class="hero-title">
+        MUEVE<br>
+        <span class="accent">TU</span><br>
+        <span class="hollow">MUNDO</span>
+      </h1>
+
+      <p class="hero-desc">
+        Ropa deportiva de élite. Nike y Adidas en un solo lugar — camisetas, pantalonetas y calzado para quien no conoce los límites.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#productos" class="btn btn-primary">🔥 Ver colección</a>
+        <a href="#contacto"  class="btn btn-outline">Contáctanos</a>
+      </div>
+
+      <div class="hero-brands" aria-label="Marcas disponibles">
+        <span class="hero-brands-label">Marcas:</span>
+        <span class="brand-pill">NIKE</span>
+        <span class="brand-pill">ADIDAS</span>
+      </div>
+    </div>
+
+    <div class="hero-badge" aria-hidden="true">
+      <div class="hero-badge-inner">
+        <div class="hero-badge-icon">👟</div>
+        <div class="hero-badge-txt">Sport & Style</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-item">Urban Sport Store <span class="mdot"></span></div>
+      <div class="marquee-item">Nike <span class="mdot"></span></div>
+      <div class="marquee-item">Adidas <span class="mdot"></span></div>
+      <div class="marquee-item">Camisetas <span class="mdot"></span></div>
+      <div class="marquee-item">Pantalonetas <span class="mdot"></span></div>
+      <div class="marquee-item">Zapatos <span class="mdot"></span></div>
+      <div class="marquee-item">Medellín <span class="mdot"></span></div>
+      <div class="marquee-item">Urban Sport Store <span class="mdot"></span></div>
+      <div class="marquee-item">Nike <span class="mdot"></span></div>
+      <div class="marquee-item">Adidas <span class="mdot"></span></div>
+      <div class="marquee-item">Camisetas <span class="mdot"></span></div>
+      <div class="marquee-item">Pantalonetas <span class="mdot"></span></div>
+      <div class="marquee-item">Zapatos <span class="mdot"></span></div>
+      <div class="marquee-item">Medellín <span class="mdot"></span></div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       CATEGORÍAS
+  =========================== -->
+  <section id="categorias" class="section" aria-labelledby="cat-h2">
+    <div class="container">
+      <div class="cat-header">
+        <div>
+          <span class="label" data-reveal>Nuestras categorías</span>
+          <span class="red-line" data-reveal style="transition-delay:.1s"></span>
+          <h2 id="cat-h2" data-reveal style="transition-delay:.15s">Encuentra<br>tu estilo</h2>
+        </div>
+        <a href="#productos" class="btn btn-outline" data-reveal="right">Ver todo →</a>
+      </div>
+
+      <div class="cat-grid">
+
+        <article class="cat-card" data-reveal>
+          <div class="cat-visual" aria-hidden="true">👕</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-arrow" aria-hidden="true">→</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Camisetas</h3>
+            <span class="cat-sub">Nike · Adidas · Performance</span>
+          </div>
+        </article>
+
+        <article class="cat-card" data-reveal style="transition-delay:.1s">
+          <div class="cat-visual" aria-hidden="true">🩳</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-arrow" aria-hidden="true">→</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Pantalonetas</h3>
+            <span class="cat-sub">Training · Running · Casual</span>
+          </div>
+        </article>
+
+        <article class="cat-card" data-reveal style="transition-delay:.2s">
+          <div class="cat-visual" aria-hidden="true">👟</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-arrow" aria-hidden="true">→</div>
+          <div class="cat-info">
+            <h3 class="cat-name">Zapatos</h3>
+            <span class="cat-sub">Running · Training · Lifestyle</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===========================
+       PRODUCTOS DESTACADOS
+  =========================== -->
+  <section id="productos" class="section" aria-labelledby="prod-h2">
+    <div class="container">
+      <div class="prod-header">
+        <div>
+          <span class="label" data-reveal>Productos destacados</span>
+          <span class="red-line" data-reveal style="transition-delay:.1s"></span>
+          <h2 id="prod-h2" data-reveal style="transition-delay:.15s">Lo mejor<br>del deporte</h2>
+        </div>
+        <p style="max-width:32ch" data-reveal="right">Selección curada de las mejores prendas y calzado deportivo Nike y Adidas disponibles en Medellín.</p>
+      </div>
+
+      <div class="prod-grid">
+
+        <!-- CAMISETAS -->
+        <article class="prod-card" data-reveal>
+          <div class="prod-img">
+            👕
+            <span class="prod-brand-badge">Nike</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-cat">Camisetas</div>
+            <div class="prod-name">Camiseta Dri-FIT Performance</div>
+            <p class="prod-desc">Tecnología de absorción de humedad para entrenamientos de alta intensidad. Tejido ligero y transpirable.</p>
+            <div class="prod-foot">
+              <span class="prod-tag">Disponible</span>
+              <button class="prod-btn" aria-label="Ver producto">→</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card" data-reveal style="transition-delay:.08s">
+          <div class="prod-img">
+            👕
+            <span class="prod-brand-badge">Adidas</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-cat">Camisetas</div>
+            <div class="prod-name">Camiseta Aeroready Training</div>
+            <p class="prod-desc">Material AEROREADY para mantenerte fresco y seco. Perfecta para gym, fútbol y entrenamientos diarios.</p>
+            <div class="prod-foot">
+              <span class="prod-tag">Disponible</span>
+              <button class="prod-btn" aria-label="Ver producto">→</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANTALONETAS -->
+        <article class="prod-card" data-reveal style="transition-delay:.16s">
+          <div class="prod-img">
+            🩳
+            <span class="prod-brand-badge">Nike</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-cat">Pantalonetas</div>
+            <div class="prod-name">Short Flex Stride Running</div>
+            <p class="prod-desc">Diseño ligero de 5" con bolsillo integrado. Ideal para correr, entrenar o uso casual.</p>
+            <div class="prod-foot">
+              <span class="prod-tag">Disponible</span>
+              <button class="prod-btn" aria-label="Ver producto">→</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card" data-reveal style="transition-delay:.24s">
+          <div class="prod-img">
+            🩳
+            <span class="prod-brand-badge">Adidas</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-cat">Pantalonetas</div>
+            <div class="prod-name">Short Essentials 3-Stripes</div>
+            <p class="prod-desc">Las icónicas 3 rayas en un short cómodo y versátil. Del entrenamiento a la calle sin perder el estilo.</p>
+            <div class="prod-foot">
+              <span class="prod-tag">Disponible</span>
+              <button class="prod-btn" aria-label="Ver producto">→</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ZAPATOS -->
+        <article class="prod-card" data-reveal style="transition-delay:.04s">
+          <div class="prod-img">
+            👟
+            <span class="prod-brand-badge">Nike</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-cat">Zapatos</div>
+            <div class="prod-name">Nike Air Max 270</div>
+            <p class="prod-desc">Amortiguación Air de 270° para el máximo confort. Diseño lifestyle con tecnología de alto rendimiento.</p>
+            <div class="prod-foot">
+              <span class="prod-tag">Disponible</span>
+              <button class="prod-btn" aria-label="Ver producto">→</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card" data-reveal style="transition-delay:.12s">
+          <div class="prod-img">
+            👟
+            <span class="prod-brand-badge">Adidas</span>
+          </div>
+          <div class="prod-body">
+            <div class="prod-cat">Zapatos</div>
+            <div class="prod-name">Adidas Ultraboost 22</div>
+            <p class="prod-desc">Tecnología Boost para una respuesta de energía excepcional en cada zancada. Running de élite.</p>
+            <div class="prod-foot">
+              <span class="prod-tag">Disponible</span>
+              <button class="prod-btn" aria-label="Ver producto">→</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div style="text-align:center;margin-top:3rem" data-reveal>
+        <p style="margin-bottom:1.5rem">¿Quieres conocer toda nuestra disponibilidad y precios?</p>
+        <a href="tel:+573244336102" class="btn btn-primary">📞 Consultar ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===========================
+       MARCAS
+  =========================== -->
+  <section id="marcas" class="section" aria-labelledby="brands-h2">
+    <div class="container brands-inner">
+      <div style="text-align:center">
+        <span class="label" data-reveal>Marcas oficiales</span>
+        <span class="red-line" data-reveal style="display:block;margin-inline:auto;transition-delay:.1s"></span>
+        <h2 id="brands-h2" data-reveal style="transition-delay:.15s">Solo lo<br>mejor</h2>
+        <p style="max-width:42ch;margin-inline:auto;margin-top:1rem" data-reveal style="transition-delay:.2s">
+          Trabajamos exclusivamente con Nike y Adidas — las marcas líderes en ropa y calzado deportivo del mundo.
+        </p>
+      </div>
+      <div class="brands-grid" data-reveal>
+        <div class="brand-card">
+          <div class="brand-logo">NIKE<span class="swoosh"> ✓</span></div>
+          <p class="brand-desc">Just Do It. Innovación, rendimiento y estilo urbano en cada producto.</p>
+          <div class="brand-items">
+            <span class="brand-item">Camisetas</span>
+            <span class="brand-item">Shorts</span>
+            <span class="brand-item">Calzado</span>
+          </div>
+        </div>
+        <div class="brand-card">
+          <div class="brand-logo">ADIDAS</div>
+          <p class="brand-desc">Impossible Is Nothing. Tecnología de vanguardia para atletas y fashionistas.</p>
+          <div class="brand-items">
+            <span class="brand-item">Camisetas</span>
+            <span class="brand-item">Shorts</span>
+            <span class="brand-item">Calzado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===========================
+       NOSOTROS
+  =========================== -->
+  <section id="nosotros" class="section" aria-labelledby="nos-h2">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual" aria-hidden="true">
+          🏃
+          <div class="about-frame"></div>
+          <div class="about-stat">
+            <div class="as-num">100%</div>
+            <div class="as-lbl">Productos originales</div>
+          </div>
+        </div>
+        <div class="about-cnt">
+          <span class="label" data-reveal="right">Quiénes somos</span>
+          <span class="red-line" data-reveal="right" style="transition-delay:.1s"></span>
+          <h2 id="nos-h2" data-reveal="right" style="transition-delay:.15s">Tu tienda<br>deportiva<br>en Medellín</h2>
+          <p data-reveal="right" style="transition-delay:.2s">Somos una tienda especializada en ropa deportiva de las mejores marcas del mundo. Nuestro compromiso es brindarte productos <strong style="color:var(--white)">100% originales</strong> con la mejor atención.</p>
+          <p data-reveal="right" style="transition-delay:.25s">Ubicados en el corazón de Medellín, en la Calle 33 #36-46, llevamos a atletas, amantes del fitness y seguidores del estilo urbano lo que necesitan para destacar.</p>
+          <div class="about-feats" data-reveal="right" style="transition-delay:.3s">
+            <div class="feat"><span class="feat-ico">✅</span><span class="feat-txt">Productos 100% originales</span></div>
+            <div class="feat"><span class="feat-ico">🚚</span><span class="feat-txt">Atención personalizada</span></div>
+            <div class="feat"><span class="feat-ico">📍</span><span class="feat-txt">Medellín, Colombia</span></div>
+            <div class="feat"><span class="feat-ico">💪</span><span class="feat-txt">Nike & Adidas oficial</span></div>
+          </div>
+          <div style="margin-top:2.2rem" data-reveal="right" style="transition-delay:.35s">
+            <a href="#contacto" class="btn btn-primary">Visítanos hoy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       CONTACTO
+  =========================== -->
+  <section id="contacto" class="section" aria-labelledby="con-h2">
+    <div class="container">
+      <div class="contact-hdr">
+        <span class="label" data-reveal>Contáctanos</span>
+        <span class="red-line" data-reveal style="display:block;margin-inline:auto;transition-delay:.1s"></span>
+        <h2 id="con-h2" data-reveal style="transition-delay:.15s">Estamos<br>para ti</h2>
+        <p style="max-width:38ch;margin-inline:auto;margin-top:1rem" data-reveal style="transition-delay:.2s">
+          Visítanos, llámanos o escríbenos. Tenemos el producto que buscas.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- INFO -->
+        <div data-reveal="left">
+          <div class="c-items">
+            <div class="c-item">
+              <div class="c-ico" aria-hidden="true">📞</div>
+              <div>
+                <div class="c-lbl">WhatsApp / Teléfono</div>
+                <div class="c-val">
+                  <a href="tel:+573244336102">+57 324 433 6102</a>
+                </div>
+              </div>
+            </div>
+            <div class="c-item">
+              <div class="c-ico" aria-hidden="true">📧</div>
+              <div>
+                <div class="c-lbl">Correo electrónico</div>
+                <div class="c-val">
+                  <a href="mailto:juliancollazosortiz123@gmail.com">juliancollazosortiz123@gmail.com</a>
+                </div>
+              </div>
+            </div>
+            <div class="c-item">
+              <div class="c-ico" aria-hidden="true">📍</div>
+              <div>
+                <div class="c-lbl">Dirección</div>
+                <div class="c-val">
+                  Calle 33 #36-46<br>
+                  <span style="font-weight:400;font-size:.82rem;color:var(--muted)">Medellín, Antioquia 🇨🇴</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-row">
+            <a href="https://www.facebook.com/profile.php?id=61588135660786" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="Urban Sport Store en Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.277h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+              </svg>
+              Facebook
+            </a>
+            <a href="https://wa.me/573244336102" target="_blank" rel="noopener noreferrer" class="soc-btn" aria-label="WhatsApp Urban Sport Store">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- MAP -->
+        <div class="map-card" data-reveal="right">
+          <div class="map-head">
+            <div class="map-dot" aria-hidden="true"></div>
+            <div class="map-title">Nuestra ubicación</div>
+          </div>
+          <div class="map-body">
+            <div class="map-pin" aria-hidden="true">📍</div>
+            <div class="map-addr">Calle 33 #36-46</div>
+            <div class="map-city">Medellín, Antioquia — Colombia 🇨🇴</div>
+            <a
+              href="https://maps.google.com/?q=Calle+33+%2336-46+Medell%C3%ADn+Antioquia+Colombia"
+              target="_blank" rel="noopener noreferrer"
+              class="btn btn-primary"
+              style="margin-top:.75rem;position:relative;z-index:1"
+            >
+              Abrir en Google Maps
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FOOTER
+  =========================== -->
+  <footer>
+    <div class="container foot-inner">
+      <div class="foot-logo">URBAN<span>SPORT</span></div>
+      <nav class="foot-links" aria-label="Links del footer">
+        <a href="#categorias">Categorías</a>
+        <a href="#productos">Productos</a>
+        <a href="#marcas">Marcas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <p class="foot-copy">© 2025 Urban Sport Store · Medellín, Colombia</p>
+    </div>
+  </footer>
+
+  <!-- ===========================
+       JAVASCRIPT
+  =========================== -->
+  <script>
+    // --- Hamburger ---
+    const hb = document.getElementById('hamburger');
+    const mm = document.getElementById('mobileMenu');
+    hb.addEventListener('click', () => {
+      const open = hb.classList.toggle('open');
+      mm.classList.toggle('open', open);
+      hb.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    document.querySelectorAll('.m-link').forEach(l => {
+      l.addEventListener('click', () => {
+        hb.classList.remove('open');
+        mm.classList.remove('open');
+        hb.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // --- Scroll reveal ---
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => ro.observe(el));
+
+    // --- Active nav link ---
+    const secs = document.querySelectorAll('section[id]');
+    const nls  = document.querySelectorAll('.nav-links a[href^="#"]');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+      nls.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--white)' : ''; });
+    }, { passive: true });
+  </script>
+</body>
+</html>
